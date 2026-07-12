@@ -6,22 +6,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
+      - name: Checkout source
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: true
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Switch npm mirror speed up
+      - name: Switch China npm mirror
         run: npm config set registry https://registry.npmmirror.com
       - name: Install dependencies
         run: npm install
       - name: Generate static pages
         run: npx hexo generate
-      - name: Deploy to gh-pages branch
+      - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
